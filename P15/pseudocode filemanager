@@ -1,0 +1,103 @@
+MAIN
+METHOD CreateSubmarine(String object)
+IMPORT object
+EXPORT nothing 
+
+FileOutputStream fileStrm = null
+PrintWriter pw
+String line
+line = ("S, " + object)
+  
+TRY
+fileStrm = new FileOutputStream("Submarine.csv")
+pw = new PrintWriter(fileStrm)
+pw.println(line)
+pw.close()
+     
+CATCH(IOException e)
+ENDMETHOD     
+     
+METHOD CreateFighterJet(String object)
+IMPORT object
+EXPORT nothing
+
+FileOutputStream fileStrm = null
+PrintWriter pw;
+String line;
+line = ("F, " + object)
+
+TRY
+     
+fileStrm = new FileOutputStream("FighterJet.csv")
+pw = new PrintWriter(fileStrm)
+pw.println(line)
+pw.close()
+     
+CATCH(IOException e)
+ENDMETHOD     
+     
+METHOD readSubmarineFile()
+IMPORT
+EXPORT
+
+FileInputStream fileStrm = null
+InputStreamReader rdr
+BufferedReader bufrdr
+String filename = "Submarine.csv"
+
+TRY
+     
+fileStrm = new FileInputStream(filename)
+rdr = new InputStreamReader(fileStrm)
+bufrdr = new BufferedReader(rdr)
+String line
+line = bufrdr.readLine()
+WHILE(line!= null)
+      
+System.out.println(line)
+line = bufrdr.readLine()
+ENDWHILE    
+fileStrm.close()
+     
+CATCH(FileNotFoundException e)
+     
+System.out.println("File not found " + e.getMessage())
+     
+catch(IOException ex2)
+ENDMETHOD    
+     
+METHOD readFighterJetFile()
+IMPORT
+EXPORT
+ 
+FileInputStream fileStrm = null
+InputStreamReader rdr
+BufferedReader bufrdr
+String filename = "FighterJet.csv"
+
+TRY
+     
+fileStrm = new FileInputStream(filename)
+rdr = new InputStreamReader(fileStrm)
+bufrdr = new BufferedReader(rdr)
+String line
+
+line = bufrdr.readLine()
+WHILE(line!= null)
+      
+System.out.println(line);
+line = bufrdr.readLine();
+ENDWHILE      
+
+fileStrm.close();
+     
+CATCH(FileNotFoundException e)
+     
+System.out.println("File not found " + e.getMessage());
+     
+CATCH(IOException ex2)
+ENDMETHOD     
+ENDMAIN     
+ 
+
+

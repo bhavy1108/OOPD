@@ -1,0 +1,47 @@
+
+ (a)What does the program do?
+    //The program outputs a random number based on an input from the user.
+
+ (b)How many methods are there?
+    //?
+	
+ (c)How many lines does each method have?
+
+    //Main = 28 lines
+    //randomTo10 = 1 lines 
+    //randomMultiply42Plus42 = 1 line
+    //randomMultiply42Plus1 = 1 line
+    //choose = 2
+    //inputNumber = 3 lines
+    //random90Plus10 = 2lines
+
+ (d)How many levels of control structure nesting are in main?
+    //2 levels
+
+ (e)What does the variable usefulThing do?
+    //Gets assigned to the value 0 which is then returned by a method
+
+ (f)What is the purpose  of the if statement on line 6?
+    //If the user inputs the number 1, a random number between o to 10 is generated.
+
+ (g)How many control structures are there?
+    //2
+
+ (h)How difficult would it be allow the upper and lower bound?
+    //Not that difficult since this takes only a few lines of codes.
+
+ (i)How difficult were these questions to answer?
+    //If i were to rate this using a scale of 0 to 10, with 0 being way too easy and 10 being way too difficult,
+      I'd have given it a score of 7.
+
+
+ (a)How much easier would the questions be to answer based on the current
+    format.
+         of the code compared to the original format?
+         //If i were to rate this using a scale of 0 to 10, with 0 being way too easy and 10 being way too difficult,
+           I'd have given it a score of 3.
+
+ (b)Using two examples, explain why the current format improves the understandability of the code.
+         //The code is now well intended and can be read easily.
+         //The variable names are meaningful and the program can be understood 
+more easily.

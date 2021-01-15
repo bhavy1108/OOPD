@@ -1,0 +1,191 @@
+CLASS Fighterjet
+CLASS FIELDS:
+  serialNum(STRING), ordanace(STRING)
+  year(INTEGER)
+  wingspan(REAL)
+  
+CONSTRUCTORS:
+DEFAULT:
+    IMPORT: none
+    EXPORT: address of new Fighterjet object
+    ASSERTION: A125748925 for serial Num, 2017 for year, default value for ordanace and wingspan of 16
+    ALGORITHM: 
+       serialNum <-- new String ("A125748925 ")  
+       year = 2017
+       ordanace <-- new String ()
+       wingspan = 16.0
+      
+COPY:
+  IMPORT: inFighterjet (Fighterjet)
+  EXPORT: address of new Fighterjet object
+  ASSERTION: Creates an object with an identical object state as the import.
+  ALGORITHM:
+     serialNum <--inFighterjet.getSerialNum<-- none 
+     year <--inFighterjet.getYear<-- none      
+     ordanace <--inFighterjet.getordanace<-- none 
+     wingspan <--inFighterjet.getwingspan<-- none 
+     
+ALTERNATE:
+  IMPORT: inSerialNum(STRING), inYear(INTEGER), inordanace(STRING), inwingspan(REAL)     
+  EXPORT: address of new Fighterjet object
+  ASSERTION: Creates an object with an identical object state as the import.
+  ALGORITHM:
+     IF(NOT(inSerialNum = null) AND (validateYear<-- inYear) AND (validateordanace<-- inordanace) AND(validatewingspan <-- inwingspan)) THEN
+       serialNum = inSerialNum
+       year = inYear
+       ordanace = inordanace
+       wingspan = inwingspan
+    ELSE
+       THROW new IllegalArgumentException("Invalid Values")
+    ENDIF        
+    
+ACCESSORS:
+ SUBMODULE:getSerialNum
+   IMPORT: none
+   EXPORT : serialNum
+   ASSERTION:
+   ALGORITHM:
+      export copy of serialNum
+ ENDSUBMODULE    
+ 
+ SUBMODULE:getYear
+   IMPORT: none
+   EXPORT : year
+   ASSERTION:
+   ALGORITHM:
+      export copy of year
+ ENDSUBMODULE    
+  
+ SUBMODULE:getordanace
+   IMPORT: none
+   EXPORT : ordanace
+   ASSERTION:
+   ALGORITHM:
+      export copy of ordanace
+ ENDSUBMODULE    
+  
+ SUBMODULE:getwingspan
+   IMPORT: none
+   EXPORT : wingspan
+   ASSERTION:
+   ALGORITHM:
+      export copy of wingspan
+ ENDSUBMODULE    
+  
+MUTATORS:
+ SUBMODULE: setSerialNum
+   IMPORT: inSerialNum(STRING)
+   EXPORT: none
+   ASSERTION: set the serialNum to inserialNum
+   ALGORITHM:
+     IF (validateSerialNum <- inSerialNum)  THEN
+        serialNum = inSerialNum
+     ELSE
+        THROW new IllegalArgumentException("Invalid serialNum")   
+     ENDIF
+ ENDSUBMODULE    
+ 
+ SUBMODULE: setYear
+   IMPORT: inYear(INTEGER)
+   EXPORT: none
+   ASSERTION: set the year to inYear
+   ALGORITHM:
+     IF (validateYear <- inYear)  THEN
+        year = inYear
+     ELSE
+        THROW new IllegalArgumentException("Invalid Year")   
+     ENDIF
+ ENDSUBMODULE     
+ 
+ SUBMODULE: setordanace
+   IMPORT: inordanace(STRING)
+   EXPORT: none
+   ASSERTION: set the ordanace to inordanace
+   ALGORITHM:
+     IF (validateordanace <- inordanace)  THEN
+        ordanace = inordanace
+     ELSE
+        THROW new IllegalArgumentException("Invalid ordanace")   
+     ENDIF
+ ENDSUBMODULE      
+ 
+ SUBMODULE: setwingspan
+   IMPORT: inwingspan(REAL)
+   EXPORT: none
+   ASSERTION: set the wingspan to inwingspan
+   ALGORITHM:
+     IF (validatewingspan <- inwingspan)  THEN
+        wingspan = inwingspan
+     ELSE
+        THROW new IllegalArgumentException("Invalid wingspan")   
+     ENDIF
+ ENDSUBMODULE     
+ 
+CLONE:
+ SUBMODULE: clone
+   IMPORT: none
+   EXPORT clone Fighterjet
+   ASSERTION :
+   ALGORITHM:
+ 
+SUBMODULE: equals
+ IMPORT: inObj(OBJECT)
+ EXPORT: same(BOOLEAN)
+ ASSERTION: 2 Fighterjet are interchangeable if they have the ordanace and wingspan.
+ ALGORITHM:
+   same:= FALSE
+   IF (inObj ISA Fighterjet) THEN 
+      inFighterjet = (convert to Fighterjet) inObj
+      same: = ((serialNum EQUALS inFighterjet.getSerialNum <-- none)AND( year EQUALS inFighterjet.getYear <- none)AND( ordanace EQUALS inFighterjet.getordanace <- none )AND(wingspan EQUALS inFighterjet.getwingspan ))
+   ENDIF
+ENDSUBMODULE
+
+SUBMODULE: toString
+  IMPORT: none
+  EXPORT: str
+  ASSERTION:
+  ALGORITHM:
+    str := ("SerialNUM:" + serialNum + " current year:" + year + "ordanace: " + ordanace + " wingspan: " + wingspan)
+ENDSUBMODULE
+
+PRIVATE SUBMODULE:
+SUBMODULE : validatewingspan
+  IMPORT: inwingspan(REAL)
+  EXPORT: valid(BOOLEAN)
+  ASSERTION: wingspan is between 2.20 to 25.6(INCLUSIVE)
+  ALGORITHM:     valid = (( inwingspan >= 2.20) AND(inwingspan <= 25.6))
+ENDSUBMODULE
+
+SUBMODULE : validateordanace
+  IMPORT: inordanace(STRING)
+  EXPORT: valid(BOOLEAN)
+  ASSERTION: ordance must not be equal to null        
+  ALGORITHM:
+    valid= (NOT(inordanace = null)) 
+ENDSUBMODULE
+
+SUBMODULE: validateYear
+  IMPORT: inYear(INTEGER)
+  EXPORT: valid(BOOLEAN)
+  ASSERTION: year must be between 1950 or 2022
+  ALGORITHM:
+     valid= ((inYear >=1950 ) AND (inYear<= 2022))
+ENDSUBMODULE
+
+SUBMODULE: validateSerialNum
+  IMPORT: inSerialNum(STRING)
+  EXPORT: valid(BOOLEAN)
+  ASSERTION: SerialNum should not be null
+  ALGORITHM: 
+    valid = (NOT(inSerialNum = null))   
+ENDSUBMODULE 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+    

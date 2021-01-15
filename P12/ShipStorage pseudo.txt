@@ -1,0 +1,207 @@
+Class constants
+  MAXSUB (int) = 15
+  MAXFIGHTER(int) = 15
+  
+Class Fields
+  countSubmarine (int)
+  countfighterJet (int)
+  Create SUBMARINEArray of type Submarin
+  Create FIGHTERArray of type FighterJet
+  
+Default Constructors:
+ IMPORT: none
+ EXPORT: address of new ShipArray object
+ ASSERTION: there should be a single constructor that has no parameters, constructs the 2 arrays and initialises the 2 count variables to 0.
+ ALGORITHM:
+  Set  SUBMARINEArray to size of  MAXSUB
+  Set  FIGHTERArray to size of  MAXFIGHTER
+  
+  countSubmarine = 0
+  countFighterJet = 0
+End Constructors
+
+SUBMODULE: Equal
+ IMPORT: SUBMARINEArray (Submarin) , FIGHTERJETArray(FighterJet)
+ EXPORT: equal(boolean)
+ ASSERTION: comparing the length of the 2 array to see whether they equal or not.
+ ALGORITHM:
+     equal(boolean) = true
+     IF(SUBMARINEArray.Length != FIGHTERArray.length) THEN
+        equal = false
+     ELSE 
+        count(int) = 0
+        DO
+           equal = subArray(count).equals(figArray(count))
+           count = count + 1
+        WHILE (equal && count < subArray.length)
+     ENDIF
+ENDSUBMODULE
+
+SUBMODULE:addShip
+  IMPORT:objSub(Submarin)
+  EXPORT: add(boolean)
+  ASSERTION: verifying whether the data receive is not null, checking whether there is space in the array
+  ALGORITHM: 
+      IF(objSub == null) THEN
+        throw new IllegalArgumentException("Invalid submarine")
+      ELSEIF (countSub > MaxSub) THEN
+        throw new IllegalArgumentException("No space left in array submarine")
+      ELSE
+        this.subArray[countSub] = objSub
+        countSub ++
+        add = true
+      ENDIF
+ENDSUBMODULE
+
+SUBMODULE:addShip
+  IMPORT:objFig(FighterJet)
+  EXPORT: add(boolean)
+  ASSERTION: verifying whether the data receive is not null, checking whether there is space in the array
+  ALGORITHM: 
+      IF(objSub == null) THEN
+        throw new IllegalArgumentException("Invalid fighter jet")
+      ELSEIF (countFig > MaxFig) THEN
+        throw new IllegalArgumentException("No space left in array Fighter jet")
+      ELSE
+        this.figArray[countFig] = objFig
+        countSub ++
+        add = true
+      ENDIF
+ENDSUBMODULE          
+        
+SUBMODULE: calTravelSub 
+  IMPORT: distance(int), i(int)
+  EXPORT: submarin(int)
+  ASSERTION: Calculate the time taken by the ship
+  ALGORITHM:
+                
+		cyclinder (int) = inengine[i].getcyclinder()		
+		maxDepth (real) = subArray[i].getMaxDepth()
+		submarin(int)
+		submarin = (CONVERT TO INTEGER)((distance/ cyclinder) * (1/10 + maxDepth))
+ENDSUBMODULE	
+
+SUBMODULE: calTravelFig 
+  IMPORT: distance(int), i(int)
+  EXPORT: fighter(int)
+  ASSERTION: Calculate the time taken by the ship
+  ALGORITHM:	
+		cyclinder(int) = inengine[i].getcyclinder()
+	        wingspan (double) = figArray[i].getwingspan()
+		fighter (int)
+		fighter = (CONVERT TO INTEGER) (distance/(wingspan * cyclinder * 150));
+ENDSUBMODULE
+
+SUBMODULE: desCheck
+ IMPORT:distance(int)
+ EXPORT: line(String)	
+ ASSERTION: finding the fastest ship among the lot
+ ALGORTITHM:
+         fastest(double) = 1000.0
+         timeTaken(double) = 0.0
+         serialNum(double)=0.0
+         typeShip (String), line(String)
+         
+         FOR i= 0 TO subArray.length 
+            timeTaken = calTravalSub <-- distance,i
+            IF(timeTaken < fastest) THEN
+                fastest = timeTaken
+                serialNum= subArray[i].getSerialNum
+                typeShip ="Submarine"
+            ENDIF
+         ENDFOR
+         
+         FOR i= 0 TO figArray.length 
+            timeTaken = calTravalFIg <-- distance,i
+            IF(timeTaken < fastest) THEN
+                fastest = timeTaken
+                serialNum=  figArray[i].getSerialNum
+                typeShip ="Fighter jet"
+            ENDIF
+         ENDFOR 
+         
+         line= ("The ship is a " + serialNum +" , is the fast ship and it is a "+typeShip + ".")
+ENDSUBMODULE         
+         
+SUBMODULE: findDuplicate
+  IMPORT: NONE
+  EXPORT: result
+  ASSERTION: finding if any the duplicate of the same ship in the same array
+  ALGORITHM:
+              found (boolean)= false
+	      a (int) =0, b (int) = 0
+	      result (String)
+	      FOR i = 0 TO subArray.length
+	           FOR j = 0 TO subArray.length  	         
+  	                IF (i == j) THEN
+  	                  found = false	                  
+  	                 IF (subArray[i]== subArray[j]) THEN
+  	                  found = true
+  	                  a= i
+  	                  b= j
+  	                  ENDIF
+  	                ENDIF	            
+	           ENDFOR
+	      ENDFOR
+	      IF (found == false) THEN
+	       result = ("There is no duplicate")
+	      ELSE	        
+	       result= ("Duplicate was found at address " + a + " and " + b + ".")
+	      ENDIF
+ENDSUBMODULE	      
+                     
+SUBMODULE: findDuplicate1
+  IMPORT: NONE
+  EXPORT: result
+  ASSERTION: finding if any the duplicate of the same ship in the same array
+  ALGORITHM:
+              found (boolean)= false
+	      a (int) =0, b (int) = 0
+	      result (String)
+	      FOR i = 0 TO figArray.length
+	           FOR j = 0 TO figArray.length  	         
+  	                IF (i == j) THEN
+  	                  found = false	                  
+  	                 IF (figArray[i]== figArray[j]) THEN
+  	                  found = true
+  	                  a= i
+  	                  b= j
+  	                  ENDIF
+  	                ENDIF	            
+	           ENDFOR
+	      ENDFOR
+	      IF (found == false) THEN
+	       result = ("There is no duplicate")
+	      ELSE	        
+	       result= ("Duplicate was found at address " + a + " and " + b + ".")
+	      ENDIF
+ENDSUBMODULE	       
+
+SUBMODULE: viewShip
+IMPORT: none
+EXPORT: result(String)
+ASSERTION : to display the content of the arrays 
+ALGORITHM:
+	 hull (String), fuel(String), result (String)= ""
+	 year(int), cyclinder(int)
+	 serialNum(double), maxDepth (double), wingspan(double)
+	 
+	 FOR i = 0 TO subArray.length
+	        serialNum = subArray[i].getSerialNum()
+		year = subArray[i].getYear()
+		hull = subArray[i].getHull()
+		maxDepth = subArray[i].getMaxDepth()
+		fuel = inengine[i].getfuel()
+		cyclinder = inengine[i].getcyclinder()
+		result =("The ship" + serialNum + " was commisioned in "+ year + " its engine has "+ cyclinder +" cyclinders and run on " + fuel+ "It is a submarine with" +hull+" hull and a max depth of " +maxDepth+ "meters.")
+	ENDFOR
+	FOR j = 0 TO figArray.length
+	        serialNum = figArray[j].getSerialNum()
+		year = figArray[j].getYear()
+		wingspan = figArray[j].getwingspan()
+		fuel = inengine[j].getfuel()
+		cyclinder = inengine[j].getcyclinder()
+		result =("The ship" + serialNum + " was commisioned in "+ year + " its engine has "+ cyclinder +" cyclinders and run on " + fuel+ "It is a fighter jet with wing span of " + wingspan+" meters." )
+	ENDFOR
+	 result = "That the end of the list😎️"
+ENDSUBMODULE

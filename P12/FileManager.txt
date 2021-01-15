@@ -1,0 +1,125 @@
+
+
+METHOD: Create Submarine
+IMPORT:
+DECLARE object : STRING
+	line : STRING
+EXPORT: None
+ALGORITHM:
+	  fileStrm = null
+          PrintWriter pw
+          line=("S" + object)
+          
+	  TRY:
+		fileStrm = new FileOutputStream("Submarin.csv")
+                pw = new PrintWriter(fileStrm)
+		pw.println(line)
+		pw.close
+	
+	CATCH:
+		 (IOException e)
+END CATCH
+END METHOD
+
+
+METHOD: Create FighterJet
+IMPORT:
+DECLARE object : STRING
+	line : STRING
+EXPORT: None
+ALGORITHM:
+	  fileStrm = null
+          PrintWriter pw
+          line=("F" + object);
+                
+	  TRY:
+		fileStrm = new FileOutputStream("FighterJet.csv")
+                pw = new PrintWriter(fileStrm)
+		pw.println(line)
+		pw.close()
+	        
+	  CATCH:
+		 (IOException e)
+
+END CATCH
+END METHOD
+
+
+SUBMODULE:readSubmarineFile
+IMPORT:
+DECLARE: Submarine.csv : STRING
+DECLARE: line: STRING
+EXPORT: NONE
+ALGORITHM:
+
+	 TRY
+	      fileStrm = new FileInputStream(FileName)
+	      rdr = new InputStreamReader(fileStrm)
+	      bufrdr = new BufferedReader(rdr)
+	           
+	      line = bufrdr.readLine()
+	           
+	 WHILE 
+	 	(line!= null)
+	            
+	               
+	OUTPUT: 
+		line = bufrdr.readLine();
+	            
+	        fileStrm.close();
+	     
+	CATCH:   
+		(FileNotFoundException e)
+	        
+        OUTPUT:        
+        	File not found 
+               
+                
+         CATCH:        
+         	(IOException ex2)
+                
+		     
+END CATCH
+END WHILE
+END SUBMODULE
+
+
+SUBMODULE:readFighterJetFile
+IMPORT:
+DECLARE: FighterJet.csv : STRING
+DECLARE: line: STRING
+EXPORT: NONE
+ALGORITHM:
+
+	 TRY
+	      fileStrm = new FileInputStream(FileName)
+	      rdr = new InputStreamReader(fileStrm)
+	      bufrdr = new BufferedReader(rdr)
+	           
+	      line = bufrdr.readLine()
+	           
+	 WHILE 
+	 	(line!= null)
+	            
+	               
+	OUTPUT: 
+		line = bufrdr.readLine();
+	            
+	        fileStrm.close();
+	     
+	CATCH:   
+		(FileNotFoundException e)
+	        
+        OUTPUT:        
+        	File not found 
+               
+                
+         CATCH:        
+         	(IOException ex2)
+                	
+END CATCH
+END WHILE
+END TRY
+END SUBMODULE
+
+

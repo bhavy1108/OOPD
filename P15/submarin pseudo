@@ -1,0 +1,192 @@
+CLASS Submarine
+CLASS FIELDS:
+  serialNum(STRING), hull(STRING)
+  year(INTEGER)
+  maxDepth(REAL)
+  
+CONSTRUCTORS:
+DEFAULT:
+    IMPORT: none
+    EXPORT: address of new Submarin object
+    ASSERTION: A125748925 for serial Num, 2017 for year, default value for hull and maxDepth of 16
+    ALGORITHM: 
+       serialNum <-- new String ("A125748925 ")  
+       year = 2017
+       hull <-- new String ()
+       maxDepth = 16.0
+      
+COPY:
+  IMPORT: inSubmarine (Submarin)
+  EXPORT: address of new Submarin object
+  ASSERTION: Creates an object with an identical object state as the import.
+  ALGORITHM:
+     serialNum <--inSubmarine.getSerialNum<-- none 
+     year <--inSubmarine.getYear<-- none      
+     hull <--inSubmarine.getHull<-- none 
+     maxDepth <--inSubmarine.getMaxDepth<-- none 
+     
+ALTERNATE:
+  IMPORT: inSerialNum(STRING), inYear(INTEGER), inHull(STRING), inMaxDepth(REAL)     
+  EXPORT: address of new Submarin object
+  ASSERTION: Creates an object with an identical object state as the import.
+  ALGORITHM:
+     IF(NOT(inSerialNum = null) AND (validateYear<-- inYear) AND (validateHull<-- inHull) AND(validateMaxDepth <-- inMaxDepth)) THEN
+       serialNum = inSerialNum
+       year = inYear
+       hull = inHull
+       maxDepth = inMaxDepth
+    ELSE
+       THROW new IllegalArgumentException("INvalid Values")
+    ENDIF        
+    
+ACCESSORS:
+ SUBMODULE:getSerialNum
+   IMPORT: none
+   EXPORT : serialNum
+   ASSERTION:
+   ALGORITHM:
+      export copy of serialNum
+ ENDSUBMODULE    
+ 
+ SUBMODULE:getYear
+   IMPORT: none
+   EXPORT : year
+   ASSERTION:
+   ALGORITHM:
+      export copy of year
+ ENDSUBMODULE    
+  
+ SUBMODULE:getHull
+   IMPORT: none
+   EXPORT : hull
+   ASSERTION:
+   ALGORITHM:
+      export copy of hull
+ ENDSUBMODULE    
+  
+ SUBMODULE:getMaxDepth
+   IMPORT: none
+   EXPORT : maxDepth
+   ASSERTION:
+   ALGORITHM:
+      export copy of maxDepth
+ ENDSUBMODULE    
+  
+MUTATORS:
+ SUBMODULE: setSerialNum
+   IMPORT: inSerialNum(STRING)
+   EXPORT: none
+   ASSERTION: set the serialNum to inserialNum
+   ALGORITHM:
+     IF (validateSerialNum <- inSerialNum)  THEN
+        serialNum = inSerialNum
+     ELSE
+        THROW new IllegalArgumentException("Invalid serialNum")   
+     ENDIF
+ ENDSUBMODULE    
+ 
+ SUBMODULE: setYear
+   IMPORT: inYear(INTEGER)
+   EXPORT: none
+   ASSERTION: set the year to inYear
+   ALGORITHM:
+     IF (validateYear <- inYear)  THEN
+        year = inYear
+     ELSE
+        THROW new IllegalArgumentException("Invalid Year")   
+     ENDIF
+ ENDSUBMODULE     
+ 
+ SUBMODULE: setHull
+   IMPORT: inHUll(STRING)
+   EXPORT: none
+   ASSERTION: set the hull to inHull
+   ALGORITHM:
+     IF (validateHull <- inHull)  THEN
+        hull = inHull
+     ELSE
+        THROW new IllegalArgumentException("Invalid hull")   
+     ENDIF
+ ENDSUBMODULE      
+ 
+ SUBMODULE: setMaxDepth
+   IMPORT: inMaxDepth(REAL)
+   EXPORT: none
+   ASSERTION: set the maxDepth to inMaxDepth
+   ALGORITHM:
+     IF (validateMaxDepth <- inMaxDepth)  THEN
+        maxDepth = inMaxDepth
+     ELSE
+        THROW new IllegalArgumentException("Invalid maxDepth")   
+     ENDIF
+ ENDSUBMODULE     
+ 
+CLONE:
+ SUBMODULE: clone
+   IMPORT: none
+   EXPORT clone Submarin
+   ASSERTION :
+   ALGORITHM:
+ 
+SUBMODULE: equals
+ IMPORT: inObj(OBJECT)
+ EXPORT: same(BOOLEAN)
+ ASSERTION: 2 Submarines are interchangeable if they have the hull and maxDepth.
+ ALGORITHM:
+   same:= FALSE
+   IF (inObj ISA Submarin) THEN 
+      inSubmarine = (convert to Submarin) inObj
+      same: = ((serialNum EQUALS inSubmarine.getSerialNum <-- none)AND( year EQUALS inSubmarine.getYear <- none)AND( hull EQUALS inSubmarine.getHull <- none )AND(maxDepth EQUALS inSubmarine.getMaxDepth ))
+   ENDIF
+ENDSUBMODULE
+
+SUBMODULE: toString
+  IMPORT: none
+  EXPORT: str
+  ASSERTION:
+  ALGORITHM:
+    str := ("SerialNUM:" + serialNum + " current year:" + year + "hull: " + hull + " maxDepth : " + maxDepth)
+ENDSUBMODULE
+
+PRIVATE SUBMODULE:
+SUBMODULE : validateMaxDepth
+  IMPORT: inMaxDepth(REAL)
+  EXPORT: valid(BOOLEAN)
+  ASSERTION: maxDepth is between -500 and 0(INCLUSIVE)
+  ALGORITHM: 
+    valid = (( inMaxDepth >= -500) AND (inMaxDepth <= 0))
+ENDSUBMODULE
+
+SUBMODULE : validateHull
+  IMPORT: inHull(STRING)
+  EXPORT: valid(BOOLEAN)
+  ASSERTION: rim must be either STEEL or TITANIUM or ALLOY           
+  ALGORITHM:
+    valid= ((inHull EQUALS "STEEL")OR(inHull EQUALS "TITANIUM")OR(inHull EQUALS "ALLOY"))  
+ENDSUBMODULE
+
+SUBMODULE: validateYear
+  IMPORT: inYear(INTEGER)
+  EXPORT: valid(BOOLEAN)
+  ASSERTION: year must be between 1950 or 2022
+  ALGORITHM:
+     valid= ((inYear >=1950 ) AND (inYear<= 2022))
+ENDSUBMODULE
+
+SUBMODULE: validateSerialNum
+  IMPORT: inSerialNum(STRING)
+  EXPORT: valid(BOOLEAN)
+  ASSERTION: SerialNum should not be null
+  ALGORITHM: 
+    valid = (NOT(inSerialNum = null))   
+ENDSUBMODULE 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+    

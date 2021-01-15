@@ -1,0 +1,21 @@
+Main
+DECLARE num1 ,num2 : int
+OUTPUT :"Enter the Numerator(num1)"
+OUTPUT : "Enter the Denominator(num2)"
+INPUT : num1, num2
+
+IF (num2 ==0)
+
+THEN 
+message = "Divide by zero not possible"
+
+ELSEIF (num1 % num2 ==0)
+message = "num1 is divisible by num2"
+
+ELSE 
+message = num1 is not divisible by num2
+ 
+END IF
+END IF
+
+OUTPUT: message

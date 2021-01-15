@@ -1,0 +1,104 @@
+Program: TestResult
+Design Date: 06/05/2019
+Test Dtae: 06/05/2019
+
+Total Tests : 11
+Test Passed: 11
+Test Failed: 0
+ 
+ Note:
+ 	S = Submarine
+ 	F = FighterJet
+ 	
+ TEST RESULTS:
+ 
+ID: 19855639 Category:Test Date: 06/05/2019 	Expected Behaviour: 		Actual Behaviour: 	Pass(P)/Fail(F)
+	     (option)
+.............................................................................................................................................
+	       1				S				S			  P
+	     			   		SerialNum : 222.033		SerialNum : 222.033		
+				   		Year: 2000			Year: 2000
+						Cylinder: 4			Cylinder: 4
+						Fuel: DIESEL			Fuel: DIESEL
+						Hull: STEEL			Hull: STEEL
+						MaxDepth: -252.52		MaxDepth: -252.52
+					
+						F				F			  P
+						SerialNum:199.002		SerialNum:199.002		
+						Year:2019			Year:2019			
+						Cylinder:3			Cylinder:3
+						Fuel:BIO			Fuel:BIO
+						wingSpan:4.32			wingSpan:4.32
+						Ordnance:20 M			Ordnance:20 M
+
+						S 				S 			  P
+						SerialNum: 185.230		SerialNum: 185.230
+						Year: 2018 			Year: 2018
+						Cylinder: 9			Cylinder: 9
+						Fuel: BATTERY			Fuel: BATTERY 
+						Hull: TITANIUM			Hull: TITANIUM
+						MaxDepth: -463.52		MaxDepth: -463.52
+					
+						F 				F 			  P
+						SerialNum: 192.237		SerialNum: 192.237
+						Year: 	2017			Year: 2017
+						Cylinder: 8			Cylinder: 8
+						Fuel: BIO			Fuel:  BIO
+						wingSpan: 6.32			wingSpan:6.32
+						Ordnance: 45 M			Ordnance:45 M
+					
+****************************************************************************************************************************************
+
+	2					S				S			  P
+	     			   		SerialNum : 197.023		SerialNum : 197.023		
+				   		Year: 2006			Year: 2006
+						Cylinder: 6			Cylinder: 6
+						Fuel: BIO			Fuel: BIO
+						Hull: TITANIUM			Hull: TITANIUM
+						MaxDepth: -349.19		MaxDepth: -349.19
+					
+						F 				F 			  P
+						SerialNum: 192.237		SerialNum: 192.237
+						Year: 	2017			Year: 2017
+						Cylinder: 10			Cylinder: 10
+						Fuel: BATTERY			Fuel:  BATTERY
+						wingSpan: 6.32			wingSpan: 6.32
+						Ordnance: 45 K			Ordnance:45 K	
+					
+******************************************************************************************************************************************
+
+	3					S				S			  P
+	     			   		SerialNum : 222.033		SerialNum : 222.033		
+				   		Year: 2000			Year: 2000
+						Cylinder: 4			Cylinder: 4
+						Fuel: DIESEL			Fuel: DIESEL
+						Hull: STEEL			Hull: STEEL
+						MaxDepth: -252.52		MaxDepth: -252.52
+					
+						F				F			  P
+						SerialNum:199.002		SerialNum:199.002		
+						Year:2019			Year:2019			
+						Cylinder:3			Cylinder:3
+						Fuel:BIO			Fuel:BIO
+						wingSpan:4.32			wingSpan:4.32
+						Ordnance:20 M			Ordnance:20 M
+
+						S 				S 			  P
+						SerialNum: 185.230		SerialNum: 185.230
+						Year: 2018 			Year: 2018
+						Cylinder: 9			Cylinder: 9
+						Fuel: BATTERY			Fuel: BATTERY 
+						Hull: TITANIUM			Hull: TITANIUM
+						MaxDepth: -463.52		MaxDepth: -463.52
+					
+						F 				F 			  P
+						SerialNum: 192.237		SerialNum: 192.237
+						Year: 	2017			Year: 2017
+						Cylinder: 8			Cylinder: 8
+						Fuel: BIO			Fuel:  BIO
+						wingSpan: 6.32			wingSpan:6.32
+						Ordnance: 45 M			Ordnance:45 M
+
+**********************************************************************************************************************************************	
+
+	4					EXIT				EXIT			P					

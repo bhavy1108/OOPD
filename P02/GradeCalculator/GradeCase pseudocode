@@ -1,0 +1,62 @@
+Main
+DECLARE: (double) mark ,mark1
+DECCLARE: (string)  solution
+OUTPUT:"Enter mark of Student:"
+
+INPUT mark
+
+case mark ((int)mark/10)
+
+case 0   
+
+solution  =  " F-<m>"
+
+case 1
+      
+solution = " F-<m>"
+
+case 2
+
+solution = " F-<m>"
+       
+case 3
+
+solution = " F-<m>"
+
+  
+case 4 
+      
+solution = " F-<m>"
+
+case 5
+
+solution ="P-5"
+
+case 6
+
+solution  ="C-6"
+
+case 7
+
+solution  = "D-7"
+
+case 8
+
+solution ="HD-8"
+
+case 9 
+    
+solution = "HD-9"
+
+case 10 
+   iF mark = 100 THEN 
+  
+solution = "HD-10"
+
+ else  
+  
+solution =    "Invalid "
+
+END CASE
+OUTPUT solution 
+

@@ -1,0 +1,406 @@
+CLASS NAME
+
+STRING HULLSTEEL "STEEL"
+STRING HULLALLOY "ALLOY"
+STRING HULLTITANIUM "TITANIUM"
+STRING FUELBATTERY "BATTERY"
+STRING FUELDIESEL "DIESEL"
+STRING FUELBIO "BIO"
+
+SUBMODULE Default Constructor
+IMPORT None
+EXPORT Address of ship object
+ASSERTION Type as valid default state
+ALGORITHM:
+	   objShipStorage = new ShipStorage()
+
+END SUBMODULE Default Constructor
+
+MAIN
+
+DECLARE Choice : INTEGER
+DECLARE InputTypeShip : INTEGER
+
+DO
+
+OUTPUT "Select an Choice" 
+	
+INPUT Choice
+
+CASE 1: 
+	"Display all ships"
+CASE 2:
+	"Add a ship"
+CASE 3:
+	"Read ships from file"
+CASE 4:
+	Exit
+DEFAULT:
+	Invalid Choice
+
+WHILE 
+	Choice < 1 or Choice > 4
+
+END WHILE
+END CASE
+END MAIN
+
+SUBMODULE InputTypeShip
+DECLARE typeShip : INTEGER
+
+DO
+
+OUTPUT "Select the type of ship to add "
+INPUT "Choice"
+
+WHILE 
+	(TypeShip < 1 || TypeShip> 2)
+
+IF 
+	(TypeShip ==1) THEN
+ 	addSubmarine
+
+IF 
+	(TypeShip ==2) THEN
+	addFighterJet
+
+RETURN typeShip
+
+END IF
+END WHILE
+END SUBMODULE InputTypeShip
+
+SUBMODULE addSubmarine
+IMPORT:
+DECLARE inSerialNum : STRING
+DECLARE inYear : INTEGER
+DECLARE inFuelType : STRING
+DECLARE inCylinder : INTEGER
+DECLARE inmaxDepth : REAL
+DECLARE inHullType : STRING
+
+EXPORT: None
+
+ALGORITHM: 
+
+DO
+
+OUTPUT "Enter a real serial number of the ship of format XXX.YYY"
+INPUT SerialNum 
+
+		TRY
+		   inSerialNum = sc.nextLine()
+	
+		CATCH 
+		   InputMismatchException ex
+			
+		   inSerialNum = "XXX.YYY"
+		   sc.nextLine()
+		   
+END CATCH
+END DO
+
+DO 
+
+OUTPUT "Enter a commission year of type integer"
+INPUT Year
+
+WHILE
+	ValidateYear(inYear)
+
+END WHILE
+END DO
+
+DO
+
+OUTPUT "Enter one fuel type (Battery, Diesel or Bio)"
+INPUT Fuel
+
+		TRY
+		   inFuelType = sc.nextLine()
+		CATCH
+		   InputMismatchException ex
+		   inFuelType = " "
+		   sc.nextLine()
+			
+END CATCH
+END DO
+
+DO
+
+OUTPUT "Enter number of cylinders of type integer"
+INPUT Cylinder
+
+WHILE
+        ValidateCylinder(inCylinder)
+
+END WHILE
+END DO
+
+DO
+
+OUTPUT "Enter the maximun depth of type real between -500.0 to 0.0"
+INPUT MaxDepth
+
+WHILE
+        ValidateMaxDepth(inMaxDepth)
+
+END WHILE
+END DO
+
+DO
+
+OUTPUT "Enter one Hull type (Steel, Alloy, Titanium)"
+INPUT One Hull type
+
+	TRY
+	    inHullType 
+	
+	CATCH
+	     InputMismatchException ex
+	     inHullType = " "
+
+WHILE Hull Valide
+Submarine objSub = new Submarine(inSerialNum, inYear, inFuelType, inCylinder, inMaxDepth, inHullType) 
+
+FileManager fm = new FileManager();
+fm.CreateSubmarine(objSub)
+
+END WHILE
+END TRY
+END DO
+END SUBMODULE addSubmarine
+
+SUBMODULE addFighterJet
+IMPORT:
+DECLARE inSerialNum : STRING
+DECLARE inYear : INTEGER
+DECLARE inFuelType : STRING
+DECLARE inCylinder : INTEGER
+DECLARE inwingSpan : REAL
+DECLARE inordnance : STRING
+
+EXPORT: None
+
+ALGORITHM: 
+
+DO
+
+OUTPUT "Enter a real serial number of the ship of format XXX.YYY"
+INPUT SerialNum 
+
+		TRY
+		   inSerialNum = sc.nextLine()
+	
+		CATCH 
+		   InputMismatchException ex
+			
+		   inSerialNum = "XXX.YYY"
+		   sc.nextLine()
+END CATCH
+END DO
+
+DO 
+
+OUTPUT "Enter a commission year of type integer"
+INPUT Year
+
+WHILE
+	ValidateYear(inYear)
+
+END WHILE
+END DO
+
+DO
+
+OUTPUT "Enter one fuel type (Battery, Diesel or Bio)
+INPUT Fuel
+
+		TRY
+		   inFuelType = sc.nextLine()
+		CATCH
+		   InputMismatchException ex
+		   inFuelType = " "
+		   sc.nextLine()
+END CATCH
+END DO
+
+DO
+
+OUTPUT "Enter number of cylinders of type integer"
+INPUT Cylinder
+
+WHILE
+        ValidateCylinder(inCylinder)
+
+END WHILE
+END DO
+
+DO
+
+OUTPUT "Enter wingSpan between 2.20 and 25.6 "
+INPUT wingSpan
+
+WHILE
+        ValidatewingSpan(inWingSpan)
+
+END WHILE
+END DO
+
+DO
+
+OUTPUT "Enter ordnance as a data type String"
+INPUT "One Hull type"
+
+	TRY
+	    inOrdnanceType 
+	
+	CATCH
+	     InputMismatchException ex
+	     inOrdnance = " "
+
+WHILE Ordnance Valide
+FighterJet objFJ = new FighterJet(inSerialNum, inYear, inFuelType, inCylinder, inwingSpan, inOrdnance) 
+
+FileManager fm = new FileManager();
+fm.CreateFighterJet(objFJ)
+
+END WHILE
+END TRY
+END DO
+END SUBMODULE addFighterJet
+
+SUBMODULE ValidateYear
+IMPORT: 
+DECLARE inYear : INTEGER
+EXPORT:
+DECLARE valid : Boolean
+ASSERTION: an interger number between 1950 and 2022 (inclusive)
+ALGORITHUM: ((inYear >= 1950) && (inYear <= 2022))
+END SUBMODULE ValidateYear
+
+
+SUBMODULE ValidateSerialNum
+IMPORT: 
+DECLARE inSerialNum :REAL
+EXPORT:
+DECLARE Valid :Boolean
+ASSERTION: a real number in the form XXX.YYY, the first part of the number must be in the range 100 to 300 (inclusive), the second part of the number must be in the range 001 to 999 (inclusive)
+ALGORITHM:
+	   ((XXX >= 100) && (XXX <= 300)) && ((YYY >= 001) && (YYY <= 999))
+END SUBMODULE ValidateSerialNum
+
+
+SUBMODULE ValidateCylinder
+IMPORT: 
+DECLARE inFuel: STRING
+EXPORT:
+DECLARE valid :BOOLEAN
+ASSERTION: cylinder must be between 2 and 20
+ALGORITHM:
+	   ((inCylinder > 2) && (inCylinder < 20))
+END SUBMODULE ValidateCylinder
+
+
+SUBMODULE ValidateFuel
+IMPORT:
+DECLARE inFuel : STRING
+EXPORT:
+DECLARE Valid : BOOLEAN
+ASSERTION: inFuel must be BATTERY or DIESEL or BIO
+ALGORITHM	   
+	 ((stripped.equals(FUELBATTERY)) || (stripped.equals(FUELBIO)) || (stripped.equals(FUELDIESEL)))
+END SUBMODULE ValidateFuel
+
+
+SUBMODULE ValidateMaxDepth
+IMPORT:
+DECLARE inmaxDepth : REAL
+EXPORT:
+DECLARE Valid : BOOLEAN
+ASSERTION maxDepth is between -500 and 0.0 (inclusive)
+ALGORITHM	   
+	 ((inMaxDepth > -500.0) && (inMaxDepth <0.0))
+END SUBMODULE ValidateMaxDepth
+
+
+SUBMODULE ValidateHUll
+IMPORT:
+DECLARE inhull : STRING
+EXPORT:
+DECLARE Valid : BOOLEAN
+ASSERTION inhull must be ALLOY or STEEL or TITANIUM
+ALGORITHM	   
+	 ((stripped.equals(this.HULLALLOY)) || (stripped.equals(this.HULLSTEEL)) || (stripped.equals(this.HULLTITANIUM)))
+END SUBMODULE ValidateHUll
+	 
+	 
+SUBMODULE ValidateOrdnance
+IMPORT:
+DECLARE Ordnance : STRING
+EXPORT:
+DECLARE Valid : BOOLEAN
+ASSERTION Ordnance should not be null
+ALGORITHM	   
+	 (inordnance != null)
+END SUBMODULE ValidateOrdnance
+
+
+SUBMODULE ValidateWingSpan
+IMPORT:
+DECLARE wingSpan : INTERGER
+EXPORT:
+DECLARE Valid :BOOLEAN
+ASSERTION a real number between 2.20 and 25.6
+ALGORITHM	   
+	  ((inwingSpan >= 2.20) && (inwingSpan <= 25.6))
+END SUBMODULE ValidateWingSpan
+
+
+SUBMODULE DisplayShip
+IMPORT:
+DECLARE:
+FileManager fm = new FileManager
+FileManager.readSubmarineFile()
+FileManager.readFighterJetFile()
+EXPORT: None
+ASSERTION: FileManager should be in the same folder
+ALGORITHM:None
+
+
+SUBMODULE: ReadShipsFile
+IMPORT:	 
+FileManager fm = new FileManager()
+OUTPUT:
+	"Select from" + "1 for reading Submarine File only" + "2 for reading FighterJet File only" + "3 for displacing Ship."
+INPUT:
+DECLARE	Select :INTEGER
+ASSERTION: The selection should be between these options provided
+ALGORITHM:
+	               	DO
+                	                	
+                	   SWITCH (Select)
+	  		   {
+				CASE 1:
+		      			FileManager.readSubmarineFile()
+
+				CASE 2:
+		     			FileManager.readFighterJetFile()
+				
+				DEFAULT:
+					System.out.println("Invalid Selection")
+					
+                		WHILE 
+                			(Select < 1 or Select > 2)
+
+END WHILE
+END CASE
+END DO 
+END SUBMODULE ReadShipsFile
+	
+	   
+	   	   
+
+
+
+

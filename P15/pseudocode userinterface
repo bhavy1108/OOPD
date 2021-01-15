@@ -1,0 +1,347 @@
+MAIN
+
+DECLARE:
+String HULLSTEEL = "STEEL"
+String HULLALLOY = "ALLOY"
+String HULLTITANIUM = "TITANIUM"
+String FUELBATTERY = "BATTERY"
+String FUELBIO = "BIO"
+String FUELDIESEL = "DIESEL"
+String ORDANCECANNON = "CANNON"
+String ORDANCEARMS = "ARMS"
+ 
+ShipStorage objShipStorage
+
+objShipStorage = new ShipStorage()
+ 
+METHOD MainMenu()
+ 
+INTEGER <-- choice
+INTEGER <-- inputTypeofShip
+  Scanner sc = new Scanner(System.in)
+
+DO
+System.out.println("Choose an option:\n" + "1.Display all ships\n" + "2.Add a ship\n" + "3.Read ship from file\n"  + "4.Exit\n")
+choice = Integer.parseInt(sc.nextLine())
+
+SWITCH(choice)
+     
+CASE 1:
+       displayShip()
+      BREAK
+CASE 2:
+       inputTypeOfShip()
+      BREAK
+CASE 3:
+       readShipFile()
+      BREAK
+CASE 4:
+       System.out.println("Existing application")
+       System.exit(0)
+      BREAK
+DEFAULT:
+        System.out.println("Invalid choice, input again");
+     
+ ENDDO
+ WHILE(choice <1 || choice >5)
+ ENDMETHOD
+ 
+METHOD inputTypeOfShip()
+ 
+Scanner sc = new Scanner(System.in)
+INTEGER <-- typeofShip = 0
+ 
+DO
+System.out.println("Select the type of ship to add \n" + "1.Submarine \n" + "2.FighterJet \n")
+typeofShip = Integer.parseInt(sc.nextLine())
+  
+ENDDO  
+WHILE(typeofShip < 1 || typeofShip > 2)
+
+IF(typeofShip == 1) 
+    
+this.addSubmarine()
+    
+ELSE IF(typeofShip == 2)
+    
+this.addFighterJet()
+    
+RETURN typeofShip
+ENDIF
+ENDMETHOD
+
+METHOD addSubmarine()
+ 
+String <-- inSerialNum
+INTEGER <-- inYear
+STRING <-- inFuel
+INTEGER <-- inCylinders
+REAL <-- inMaxDepth
+STRING <-- inHull
+
+Scanner sc = new Scanner(System.in)
+
+DO
+    
+System.out.println("Enter a serial number of the ship of format XXX.YYY : ")
+TRY
+        
+inSerialNum = sc.nextLine()
+        
+CATCH (InputMismatchException ex)
+        
+inSerialNum = "XXX.YYY"
+sc.nextLine()
+        
+ENDDO
+WHILE(!validateSerialNum(inSerialNum))
+
+DO
+    
+System.out.println("Enter a commission year of type integer : ")
+inYear = Integer.parseInt(sc.nextLine())
+    
+ENDDO
+WHILE (!validateYear(inYear))
+
+DO
+    
+System.out.println("Enter the fuel type (Battery, Diesel or Bio) : ")
+TRY
+        
+inFuel = sc.nextLine()
+        
+CATCH (InputMismatchException ex)
+        
+inFuel = "" 
+sc.nextLine()
+        
+ENDDO     
+WHILE (!validateFuel(inFuel))
+
+DO
+    
+System.out.println("Enter number of cylinders of type integer : ")
+inCylinders = Integer.parseInt(sc.nextLine())
+  
+ENDDO  
+WHILE (!validateCylinders(inCylinders))
+
+DO
+    
+System.out.println("Enter the maximum depth of type real between -500.0 to 0.0 : ")
+inMaxDepth = Double.parseDouble(sc.nextLine())
+
+ENDDO
+WHILE (!validateMaxDepth(inMaxDepth))
+
+DO
+    
+System.out.println("Enter one hull type (Steel, Alloy, Titanium) : ")
+TRY
+        
+inHull = sc.nextLine()
+        
+CATCH(InputMismatchException ex)
+        
+inHull = ""
+sc.nextLine()
+        
+ENDDO
+WHILE (!validateHull(inHull))
+
+  SubmarineClass objSubmarine = new SubmarineClass(inSerialNum, inYear, inHull, inMaxDepth)
+  EngineClass objEngine = new EngineClass(inFuel, inCylinders)
+  String object = (objSubmarine + "," + objEngine)
+  //add to file
+  FileManager fm = new FileManager()
+  fm.CreateSubmarine(object)
+ENDMETHOD
+
+METHOD addFighterJet()
+
+STRING <-- inSerialNum
+INTEGER <-- inYear
+STRING <-- inFuel
+INTEGER <-- inCylinders
+REAL <-- inWingSpan
+STRING <--inOrdance
+
+Scanner sc = new Scanner(System.in)
+
+DO
+    
+System.out.println("Enter a serial number of the ship of format XXX.YYY : ")
+TRY
+        
+inSerialNum = sc.nextLine()
+        
+CATCH (InputMismatchException ex)
+         
+inSerialNum = ""
+sc.nextLine()
+        
+ENDDO
+WHILE (!validateSerialNum(inSerialNum))
+
+DO
+    
+System.out.println("Enter a commission year of type integer : ")
+inYear = Integer.parseInt(sc.nextLine())
+    
+ENDDO
+WHILE (!validateYear(inYear))
+
+DO
+    
+System.out.println("Enter ine fuel type (Battery, Diesel or Bio) : ")
+TRY
+        
+inFuel = sc.nextLine()
+        
+CATCH (InputMismatchException ex)
+        
+inFuel = "" 
+sc.nextLine()
+        
+ENDDO
+WHILE (!validateFuel(inFuel))
+
+DO
+    
+System.out.println("Enter number of cylinders of type integer : ")
+inCylinders = Integer.parseInt(sc.nextLine())
+    
+ENDDO
+WHILE (!validateCylinders(inCylinders))
+
+DO
+    
+System.out.println("Enter the wingSpan of type real between 2.20 to 25.6 : ")
+inWingSpan = Double.parseDouble(sc.nextLine())
+    
+ENDDO
+WHILE (!validateWingSpan(inWingSpan))
+
+DO
+    
+System.out.println("Enter an ordance type (Cannon or Arms)  : ")
+TRY 
+        
+inOrdance = sc.nextLine()
+        
+CATCH(InputMismatchException ex)
+        
+         inOrdance = ""
+         sc.nextLine()
+        
+ENDDO
+WHILE (!validateOrdance(inOrdance))
+
+  FighterJetClass objFighterJet = new FighterJetClass(inSerialNum, inYear, inOrdance, inWingSpan)
+  EngineClass objEngine = new EngineClass(inFuel, inCylinders)
+  String object = (objFighterJet + "," + objEngine)
+  //add to file
+  FileManager fm = new FileManager()
+  fm.CreateFighterJet(object)
+ENDMETHOD
+
+SUBMODULE validateOrdance(STRING <-- inOrdance)
+IMPORT:inOrdance
+EXPORT:value
+ASSERTION: 
+RETURN (inOrdance != null)
+ENDSUBMODULE
+
+SUBMODULE validateWingSpan(REAL <-- inWingSpan)
+IMPORT:inWingSpan
+EXPORT:value
+ASSERTION:wingspan must be between 2.20 and 25.6 inclusive
+RETURN ((inWingSpan >= 2.20) AND (inWingSpan <= 25.6))
+ENDSUBMODULE
+
+SUBMODULE validateMaxDepth(REAL <-- inMaxDepth)
+IMPORT:inMaxDepth
+EXPORT:value
+ASSERTION:maxDepth must be between -500.0 and 0.0 inclusive
+RETURN((inMaxDepth >= -500.0) AND (inMaxDepth <= 0.0))
+ENDSUBMODULE
+
+SUBMODULE validateHull(STRING <-- inHull)
+IMPORT:inHull
+EXPORT:value
+ASSERTION:hull must be either ALLOY OR STEEL OR TITANIUM
+STRING <-- stripped = inHull.toUpperCase()
+RETURN((stripped.equals(this.HULLALLOY)) OR (stripped.equals(this.HULLSTEEL)) OR (stripped.equals(this.HULLTITANIUM)))
+ENDSUBMODULE
+
+SUBMODULE validateYear(INTEGER <-- inYear)
+IMPORT:inYear
+EXPORT:value
+ASSERTION:year must be between 1950 AND 2022 inclusive
+RETURN ((inYear >= 1950) && (inYear <= 2022))
+ENDSUBMODULE
+
+SUBMODULE validateSerialNum(STRING <-- inSerialNum)
+IMPORT:serialNum
+EXPORT:value
+ASSERTION:
+  STRING <-- stripped = inSerialNum.toUpperCase()
+  STRING <-- numArray[] = stripped.split("\\.")
+  INTEGER xxx = Integer.parseInt(numArray[0])
+  INTEGER yyy = Integer.parseInt(numArray[1])
+  RETURN ((xxx >= 100) AND (xxx <= 300)) AND ((yyy >= 001) AND (yyy <= 999));
+ENDSUBMODULE
+
+SUBMODULE validateCylinders(INTEGER <-- inCylinders)
+IMPORT:inCylinders
+EXPORT:value
+ASSERTION:cylinders must between 2 AND 20 inclusive
+RETURN ((inCylinders >= 2) AND (inCylinders <= 20))
+ENDSUBMOUDLE
+
+SUBMODULE validateFuel(STRING inFuel)
+IMPORT:inFuel
+EXPORT:value
+ASSERTION:fuel must either BATTERY OR BIO OR DIESEL
+STRING <-- stripped = inFuel.toUpperCase()
+RETURN ((stripped.equals(this.FUELBATTERY)) OR (stripped.equals(this.FUELBIO)) OR (stripped.equals(this.FUELDIESEL)))
+ENDSUBMODULE
+
+METHOD displayShip()
+ 
+FileManager fm = new FileManager()
+fm.readSubmarineFile()
+fm.readFighterJetFile()
+ENDMETHOD
+
+METHOD readShipFile()
+ 
+FileManager fm = new FileManager()
+System.out.println("Choose from : \n1. for reading submarine file only\n2.for reading fighterjet file only\n3.for reading both files.")
+Scanner sc = new Scanner(System.in)
+INTEGER <-- choice = sc.nextInt()
+DO
+    
+     SWITCH(choice)
+     
+      CASE 1:
+             fm.readSubmarineFile()
+             BREAK
+      CASE 2:
+             fm.readFighterJetFile()
+             BREAK
+      CASE 3:
+             displayShip()
+             BREAK
+      DEFAULT:
+              System.out.println("Invalid choice,input again")
+     ENDCASE
+ENDDO
+WHILE (choice < 1 OR choice > 3)
+ENDMETHOD 
+
+ 
+
+
+  

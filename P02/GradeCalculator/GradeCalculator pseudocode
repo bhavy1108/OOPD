@@ -1,0 +1,30 @@
+ 
+Main
+DECALRE mark :Double
+OUTPUT:"Enter mark of Student:"
+INPUT mark
+IF mark < 0 THEN
+Message  = "Invalid "
+ELSE IF mark >= 0 AND mark< 0 THEN
+Message = " F" + mark
+ELSE IF mark >= 50 AND mark <60 THEN 
+Message = "P-5"
+ELSE IF mark >=60 AND mark <70 THEN
+Message = "C-6"
+ELSE IF mark >= 70 AND mark < 80 THEN
+Message = "D-7"
+ELSE IF mark >=80 AND mark <90 THEN
+Message = "HD-9"
+ELSE IF mark =100 THEN
+Message = "HD-10"
+ELSE 
+Message = "Invalid "
+END IF
+END IF
+END IF 
+END IF 
+END IF 
+END IF
+END IF
+END IF
+OUTPUT Message 

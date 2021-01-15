@@ -1,0 +1,13 @@
+
+(a) line 55
+
+(b) the variable "elsevar" has been declared inside the block of "if" hence, we can not accessed it in the "else" part .
+
+(c) vaiable 1 and variable 2  have been declared in line 18.
+ It is because the variables are found within a nested if scope thus access is valid.
+
+(d) It does not cause any issue since the variable has been declared in an unconnected scope using the same variable name . in both nested if , the variable elsevar has been declare . line 66 & line 75
+ 
+(e) The  class constant CONS is a Global varaible (line 12) and it has use a local scope variable of the same name (line 92) , that's why in line 95  the value of  CONS  could be overwritten.
+
+(f) Th local scope variable hs given priority to Global Variable.

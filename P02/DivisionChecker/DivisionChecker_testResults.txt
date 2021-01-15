@@ -1,0 +1,27 @@
+Program: DivisionChecker.java
+Design Date: 22/03/2018
+Test Date: 
+
+Total Tests: 3
+Tests Passed:
+Tests Failed:
+
+Note: 
+
+TEST RESULTS:
+ID: Category:           Test Data:        Expected Behaviour:          Actual Behaviour:     Pass(P)/Fail(F)
+                        (num1,num2)
+_____________________________________________________________________________________________________________________
+1 divisible             (9,3)  pass      "Divisible"
+                                  
+______________________________________________________      num1 is divisible by num2  
+___________________________________________________________
+2   not divisible       (9, 2)  pass     "Not Divisible"  
+                                                            num1 is not divisible by num2       
+_____________________________________________________________________________________________________________________
+3   Divide by 0         (9, 0)  pass      "Not Divisible"  
+                                                            Divide by zero not possible
+_____________________________________________________________________________________________________________________
+
+
+

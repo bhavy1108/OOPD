@@ -1,0 +1,131 @@
+CLASS engine
+CLASS FIELDS:
+  fuel(STRING)
+  cyclinder(INTEGER)
+  
+  
+CONSTRUCTORS:
+DEFAULT:
+    IMPORT: none
+    EXPORT: address of new engine object
+    ASSERTION: DIESEL for serial Num, 10 for cyclinder
+    ALGORITHM: 
+       fuel <-- new String ("DIESEL ")  
+       cyclinder = 10
+      
+      
+COPY:
+  IMPORT: inengine (engine)
+  EXPORT: address of new engine object
+  ASSERTION: Creates an object with an identical object state as the import.
+  ALGORITHM:
+     fuel <--inengine.getfuel<-- none 
+     cyclinder <--inengine.getcyclinder<-- none      
+     
+ALTERNATE:
+  IMPORT: infuel(STRING), incyclinder(INTEGER)    
+  EXPORT: address of new engine object
+  ASSERTION: Creates an object with an identical object state as the import.
+  ALGORITHM:
+     IF(NOT(infuel = null) AND (validatecyclinder<-- incyclinder)) THEN
+       fuel = infuel
+       cyclinder = incyclinder
+    ELSE
+       THROW new IllegalArgumentException("Invalid Values")
+    ENDIF        
+    
+ACCESSORS:
+ SUBMODULE:getfuel
+   IMPORT: none
+   EXPORT : fuel
+   ASSERTION:
+   ALGORITHM:
+      export copy of fuel
+ ENDSUBMODULE    
+ 
+ SUBMODULE:getcyclinder
+   IMPORT: none
+   EXPORT : cyclinder
+   ASSERTION:
+   ALGORITHM:
+      export copy of cyclinder
+ ENDSUBMODULE      
+  
+MUTATORS:
+ SUBMODULE: setfuel
+   IMPORT: infuel(STRING)
+   EXPORT: none
+   ASSERTION: set the fuel to infuel
+   ALGORITHM:
+     IF (validatefuel <- infuel)  THEN
+        fuel = infuel
+     ELSE
+        THROW new IllegalArgumentException("Invalid fuel")   
+     ENDIF
+ ENDSUBMODULE    
+ 
+ SUBMODULE: setcyclinder
+   IMPORT: incyclinder(INTEGER)
+   EXPORT: none
+   ASSERTION: set the cyclinder to incyclinder
+   ALGORITHM:
+     IF (validatecyclinder <- incyclinder)  THEN
+        cyclinder = incyclinder
+     ELSE
+        THROW new IllegalArgumentException("Invalid cyclinder values")   
+     ENDIF
+ ENDSUBMODULE     
+ 
+CLONE:
+ SUBMODULE: clone
+   IMPORT: none
+   EXPORT clone engine
+   ASSERTION :
+   ALGORITHM:
+ 
+SUBMODULE: equals
+ IMPORT: inObj(OBJECT)
+ EXPORT: same(BOOLEAN)
+ ASSERTION: 2 Fighterjet are interchangeable if they have the fuel and cyclinder
+ ALGORITHM:
+   same:= FALSE
+   IF (inObj ISA engine) THEN 
+      inengine = (convert to engine) inObj
+      same: = ((fuel EQUALS inengine.getfuel <-- none)AND(cyclinder EQUALS inengine.getcyclinder <- none))
+   ENDIF
+ENDSUBMODULE
+
+SUBMODULE: toString
+  IMPORT: none
+  EXPORT: str
+  ASSERTION:
+  ALGORITHM:
+    str := ("fuel:" + fuel + " current cyclinder:" + cyclinder)
+ENDSUBMODULE
+
+PRIVATE SUBMODULE:
+SUBMODULE: validatecyclinder
+  IMPORT: incyclinder(INTEGER)
+  EXPORT: valid(BOOLEAN)
+  ASSERTION: cyclinder must be between 2 or 20
+  ALGORITHM:
+     valid= ((incyclinder >=2 ) AND (incyclinder<= 20))
+ENDSUBMODULE
+
+SUBMODULE: validatefuel
+  IMPORT: infuel(STRING)
+  EXPORT: valid(BOOLEAN)
+  ASSERTION: fuel should be either BATTERY or DIESEL or BIO
+  ALGORITHM: 
+    valid =  ((infuel == "BATTERY") || (infuel == "DIESEL") || (infuel== "BIO"))  
+ENDSUBMODULE 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+    

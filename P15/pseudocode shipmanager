@@ -1,0 +1,13 @@
+MAIN
+
+TRY
+UserInterface Ojbuserinterface = new UserInterface()
+Ojbuserinterface.MainMenu()
+     
+catch (Exception ex)
+     
+System.out.println(ex.getMessage());
+ENDMAIN    
+  
+
+ 

@@ -1,0 +1,31 @@
+ 
+
+Boolean Expression 
+
+(a) Deciding if kirk is the same as " captain"
+
+Ans : kirk.equals_"captain"
+
+(b) Deciding if yoda is an even number and han is an odd number
+
+Ans: ( yoda % 2 ==0) && (han % 2! = 0 )
+
+(c) Deciding if jon or arya are equal to the letter S
+
+Ans : ( jon.equals_'s') // (arya.equals_'s')
+
+(d) Deciding if spock starts with letter V
+
+Ans: (spoke.startswith 'v')
+
+(e) Deciding if jon is the same as arya
+
+Ans : ( jon.equals_"arya") OR ( jon == arya )
+
+(f) Deciding if steve is the same as tony 
+
+Ans : (steve.equals_"tony")
+
+(g) Deciding if luke is positive or steve is between 25.0 and 125.0(inclusive)
+
+Ans: (steve >= 25.0) && (steve <= 125.0)

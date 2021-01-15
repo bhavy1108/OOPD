@@ -1,0 +1,106 @@
+MAIN
+
+DECLARE PI : DOUBLE = 3.14
+DECLARE option : INTEGER
+DECLARE diameter :DOUBLE
+DECLARE areaCircleInM, areaRectangleInM, areaTriangleInM : DOUBLE
+DECLARE areaCircleInCm, areaRectangleInCm, areaTriangleInCm : DOUBLE
+DECLARE lengthRectangle,widthRectangle, base, heigth : DOUBLE
+DECLARE areaCircle,areaRectangle, areaTriangle : DOUBLE
+DECLARE areaCircleInMm, areaRectangleInMm, areaTriangleInMm : DOUBLE
+
+OUTPUT "Choose and Enter ONE Option from the following"
+
+DO
+
+INPUT  Option
+ WHILE (option <>1) and (option <>2) and (option <>3)  and ( choice <>4)
+OUTPUT "Error . Input again"
+
+ENDWHILE
+
+Case Option of
+
+case 1
+
+OUTPUT "Enter diameter of Circle:"
+INPUT diameter(int)
+areaCirc <--CalculateAreaCircle <--diameter
+AreaConversion <-- areaCirc
+
+OUTPUT "Area of circle is:" + msq+ cmsq +mmsq
+
+case 2
+
+OUTPUT "Enter length of Rectangle"
+INPUT lengthRectangle
+
+
+OUTPUT "Enter width of Rectangle"
+INPUT widthRectangle
+areaRec <--CalculateAreaRectangle <--lengthRectangle , widthRectangle
+AreaConversion <-- areaRec
+
+
+OUTPUT "Area of rectangle is: "+ msq+ cmsq +mmsq
+
+case 3
+OUTPUT "Enter base of Triangle "
+INPUT base
+
+OUTPUT "Enter heigth of Triangle"
+INPUT heigth
+
+areaTri <-- CalculateAreaTriangle <-- base ,height
+AreaConversion <-- areaTri
+
+OUTPUT "Area of triangle is:"+ msq+ cmsq +mmsq
+
+case 4
+OUTPUT "Good Bye"
+
+ENDCASE
+ENDMAIN
+-------------------------------------------------------------------
+SUBMODULE CalculateAreaCircle
+IMPORT diameter 
+EXPORT areaCirc :double
+
+Algorithm
+areaCirc =  3.14* d/2 *d/2
+
+END SUBMODULE CalculateAreaCircle
+-----------------------------------------------------
+SUBMODULE CalculateAreaRectangle
+IMPORT lengthRectangle , widthRectangle
+EXPORT areaRec :int
+
+Algorithm
+
+areaRec = L* W
+
+END SUBMODULE CalculateAreaRectangle
+-----------------------------------------------------
+SUBMODULE CalculateAreaTriangle
+IMPORT base , height
+EXPORT areaTri
+
+Algorithm
+
+areaTri = ((b/10) * (h/10))/2
+
+END SUBMODULE CalculateAreaTriangle
+-----------------------------------------------------
+SUBMODULE AreaConversion
+IMPORT areaCirc 
+EXPORT
+
+Algorithm
+
+
+msq= ( convert to integer )area /10000
+cmsq= (Convert to integer) area % 10000
+mmsq = (convert to double)(area -(int)a00rea)*100)
+
+
+END SUBMODULE AreaConversion
